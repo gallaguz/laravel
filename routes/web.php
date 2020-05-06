@@ -13,6 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('test');
+Route::get('/', [
+    'uses' => 'HomeController@index',
+    'as' => 'Home'
+]);
+/*
+|--------------------------------------------------------------------------
+| Админка
+|--------------------------------------------------------------------------
+|
+| Функции админа
+|
+*/
+Route::group([
+    'prefix' => 'admin',
+    'namespace' => 'Admin',
+    'as' => 'admin.'
+], function () {
+    Route::get('/', 'IndexController@index')->name('index');
+    Route::get('/test1', 'IndexController@test1')->name('test1');
+    Route::get('/test2', 'IndexController@test2')->name('test2');
 });
+
+
+Route::get('/news', 'NewsController@index')->name('News');
+Route::get('/news/{id}', 'NewsController@show')->name('NewsOne');
