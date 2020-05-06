@@ -7,13 +7,31 @@ class News
     private static $news = [
         1 => [
             'id' => 1,
-            'title' => 'Новость 1',
-            'text' => 'А у нас новость 1 и она очень хорошая!'
+            'title' => 'Новости спорта (1)',
+            'text' => 'А у нас новость 1 и она очень хорошая!',
+            'isPrivate' => true,
+            'category_id' => 1
         ],
         2 => [
             'id' => 2,
-            'title' => 'Новость 2',
-            'text' => 'А тут плохие новости((('
+            'title' => 'Новости спорта (2)',
+            'text' => 'А тут плохие новости(((',
+            'isPrivate' => false,
+            'category_id' => 1
+        ],
+        3 => [
+            'id' => 3,
+            'title' => 'Новости политики (3)',
+            'text' => 'А тут плохие новости(((',
+            'isPrivate' => false,
+            'category_id' => 2
+        ],
+        4 => [
+            'id' => 4,
+            'title' => 'Новости политики (4)',
+            'text' => 'А тут плохие новости(((',
+            'isPrivate' => false,
+            'category_id' => 2
         ],
     ];
 
@@ -22,10 +40,19 @@ class News
     }
 
     public static function getNewsId($id) {
-        foreach (static::$news as $news) {
-            if ($news['id'] == $id) {
-                return $news;
+        return static::$news[$id];
+    }
+
+    public static function getNewsByCategoryName($name) {
+        $id = Category::getCategoryIdByName($name);
+        $news = [];
+
+        foreach (static::$news as $item) {
+            if ($item['category_id'] == $id) {
+                $news[] = $item;
             }
         }
+
+        return $news;
     }
 }

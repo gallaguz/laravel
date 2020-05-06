@@ -1,3 +1,13 @@
-@include('menu')
+@extends('layouts.main')
 
-<p>Админка</p>
+@section('title')
+    @parent | Главная
+@endsection
+
+@section('menu')
+    @include('admin.menu')
+@endsection
+
+@section('content')
+    <p>Админка!</p>
+@endsection
