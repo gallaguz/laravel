@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index() {
-        return view('news')->with('categories', Category::getCategories());
+        return view('news.categories')->with('categories', Category::getCategories());
     }
 
     public function show($name) {
-        return view('news')->with('news', News::getNewsByCategoryName($name));
+        return view('news.category')->with('news', News::getNewsByCategoryName($name));
     }
 }

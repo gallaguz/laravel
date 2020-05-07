@@ -36,5 +36,49 @@ Route::group([
 });
 
 
-Route::get('/news', 'NewsController@index')->name('News');
-Route::get('/news/{id}', 'NewsController@show')->name('NewsOne');
+Route::group([
+    'prefix' => 'news',
+    'as' => 'news.'
+], function () {
+    Route::get('/', 'NewsController@index')->name('index');
+    Route::get('/one/{id}', 'NewsController@show')->name('show');
+
+    Route::group([
+        'as' => 'category.'
+    ], function () {
+        Route::get('/categories/', 'CategoryController@index')->name('index');
+        Route::get('/category/{name}', 'CategoryController@show')->name('show');
+    });
+
+
+});
+
+Route::view('/vue', 'vue')->name('vue');
+
+//Auth::routes();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
