@@ -23,12 +23,12 @@ class MenuProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->getMenu();
+        //$this->getMenu();
     }
 
     private function getMenu() {
-        view()->composer('layouts.main', function ($view) {
-            $view->with('menu', view('menu'));
+        \View::composer('layouts.main', function ($view) {
+            $view->with('menu', \view('menu'));
         });
     }
 }

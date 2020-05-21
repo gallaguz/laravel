@@ -4,6 +4,10 @@
     @parent | Одна новость
 @endsection
 
+@section('menu')
+    @include('menu')
+@endsection
+
 @section('content')
     @if (!$news['isPrivate'])
         <h2><?=$news['title']?></h2>

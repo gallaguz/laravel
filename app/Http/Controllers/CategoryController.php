@@ -15,4 +15,5 @@ class CategoryController extends Controller
     public function show($name) {
         return view('news.category')->with('news', News::getNewsByCategoryName($name));
     }
+
 }

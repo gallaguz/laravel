@@ -2,26 +2,24 @@
 
 namespace App;
 
-//use Illuminate\Database\Eloquent\Model;
 
-use phpDocumentor\Reflection\Types\Static_;
-
-class Category // extends Model
+class Category
 {
     private static $categories = [
         1 => [
             'id' => 1,
             'category' => 'Спорт',
-            'name' => 'sport'
+            'name' => 'sport',
         ],
         2 => [
             'id' => 2,
             'category' => 'Политика',
-            'name' => 'politics'
-        ]
+            'name' => 'politics',
+        ],
     ];
 
-    public static function getCategories() {
+    public static function getCategories()
+    {
         return static::$categories;
     }
 
@@ -39,4 +37,6 @@ class Category // extends Model
     public static function getCategoryById($id) {
         return static::$categories[$id];
     }
+
+
 }

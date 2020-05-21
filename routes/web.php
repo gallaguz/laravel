@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,10 +29,10 @@ Route::group([
     'as' => 'admin.'
 ], function () {
     Route::get('/', 'IndexController@index')->name('index');
-    Route::get('/test1', 'IndexController@test1')->name('test1');
-    Route::get('/test2', 'IndexController@test2')->name('test2');
+    Route::match(['get', 'post'], '/create', 'IndexController@create')->name('create');
+    Route::get('/test', 'IndexController@test')->name('test');
+    Route::get('/json', 'IndexController@json')->name('json');
 });
-
 
 Route::group([
     'prefix' => 'news',
@@ -42,43 +40,18 @@ Route::group([
 ], function () {
     Route::get('/', 'NewsController@index')->name('index');
     Route::get('/one/{id}', 'NewsController@show')->name('show');
-
     Route::group([
         'as' => 'category.'
     ], function () {
-        Route::get('/categories/', 'CategoryController@index')->name('index');
+        Route::get('/categories', 'CategoryController@index')->name('index');
         Route::get('/category/{name}', 'CategoryController@show')->name('show');
     });
-
-
 });
 
 Route::view('/vue', 'vue')->name('vue');
 
-//Auth::routes();
+Auth::routes();
 
+//Route::resource('/newsCrud', 'Test');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//Route::get('/home', 'HomeController@index')->name('home');

@@ -1,4 +1,5 @@
-<a href="{{ route('Home') }}">Главная</a>
-<a href="{{ route('admin.test1') }}">Тест 1</a>
-<a href="{{ route('admin.test2') }}">Тест 2</a>
-<br>
+<li class="nav-item"><a class="nav-link" href="{{ route('Home') }}">Главная</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('admin.create') }}">Добавить новость</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('admin.test') }}">test</a></li>
+<li class="nav-item"><a class="nav-link" href="{{ route('admin.json') }}">Скачать новости в JSON</a></li>
+
