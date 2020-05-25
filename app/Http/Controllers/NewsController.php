@@ -14,16 +14,15 @@ class NewsController extends Controller
 
         $news = News::query()
             ->where('isPrivate', false)
-            ->get();
+            ->paginate(2);
 
-
+        //$news->keyBy('id'); - для соответствия ключей
 
         return view('news.index')->with('news', $news);
     }
 
     public function show($id)
     {
-        //$news = News::query()->find($id);
         $news = News::query()->find($id);
 
         if (!empty($news)) {

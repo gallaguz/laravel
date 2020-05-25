@@ -25,6 +25,9 @@
                         @empty
                             Нет новостей
                         @endforelse
+
+                        {{ $news->links() }}
+
                     </div>
                 </div>
             </div>

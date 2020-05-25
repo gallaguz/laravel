@@ -12,6 +12,9 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', [
     'uses' => 'HomeController@index',
     'as' => 'Home'
@@ -29,10 +32,16 @@ Route::group([
     'namespace' => 'Admin',
     'as' => 'admin.'
 ], function () {
-    Route::get('/', 'IndexController@index')->name('index');
-    Route::match(['get', 'post'], '/create', 'IndexController@create')->name('create');
-    Route::get('/test', 'IndexController@test')->name('test');
-    Route::get('/json', 'IndexController@json')->name('json');
+    Route::get('/', 'NewsController@index')->name('index');
+
+    //CRUD NEWS
+    Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
+    Route::get('/edit/{new}', 'NewsController@edit')->name('edit');
+    Route::post('/update/{news}', 'NewsController@update')->name('update');
+    Route::get('/destroy/{news}', 'NewsController@destroy')->name('destroy');
+
+    //Route::get('/test', 'IndexController@test')->name('test');
+    //Route::get('/json', 'IndexController@json')->name('json');
 });
 
 Route::group([

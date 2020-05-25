@@ -18,39 +18,6 @@ class IndexController extends Controller
         return view('admin.index');
     }
 
-    public function create(Request $request)
-    {
-        if ($request->isMethod('post')) {
-            //$request->flash();
-
-            $url = null;
-
-            if($request->file('image')) {
-                $path = Storage::putFile('public/images', $request->file('image'));
-                $url = Storage::url($path);
-            }
-
-
-
-            $data = [
-                'title' => $request->title,
-                //'category_id' => $request->category,
-                'text' => $request->text,
-                'image' => $url,
-                'isPrivate' => isset($request->isPrivate)
-            ];
-
-
-            DB::table('news')->insert($data);
-
-            return redirect()->route('admin.index')->with('success', 'Новость успешно добавлена!');
-
-        }
-        return view('admin.create', [
-            'categories' => Category::getCategories()
-        ]);
-    }
-
     public function json()
     {
         return response()->json(News::getNews())
