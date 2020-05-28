@@ -22,7 +22,7 @@ class NewsSeeder extends Seeder
         $data = [];
 
 
-        for($i = 0; $i <= 10; $i++) {
+        for($i = 0; $i <= 50; $i++) {
             $data[] = [
                 'title' => $faker->realText(rand(20,50)),
                 'text' => $faker->realText(rand(100,3000)),

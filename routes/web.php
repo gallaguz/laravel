@@ -1,6 +1,5 @@
 <?php
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +11,7 @@
 |
 */
 
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [
@@ -32,16 +31,16 @@ Route::group([
     'namespace' => 'Admin',
     'as' => 'admin.'
 ], function () {
-    Route::get('/', 'NewsController@index')->name('index');
-
     //CRUD NEWS
+    Route::get('/', 'NewsController@index')->name('index');
     Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
-    Route::get('/edit/{new}', 'NewsController@edit')->name('edit');
+    Route::get('/edit/{news}', 'NewsController@edit')->name('edit');
     Route::post('/update/{news}', 'NewsController@update')->name('update');
     Route::get('/destroy/{news}', 'NewsController@destroy')->name('destroy');
 
-    //Route::get('/test', 'IndexController@test')->name('test');
-    //Route::get('/json', 'IndexController@json')->name('json');
+
+    Route::get('/downloadImage', 'IndexController@downloadImage')->name('downloadImage');
+    Route::get('/json', 'IndexController@json')->name('json');
 });
 
 Route::group([

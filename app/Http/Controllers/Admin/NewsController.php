@@ -13,13 +13,15 @@ class NewsController extends Controller
 {
     public function index() {
         $news = News::query()
-            ->paginate(5);
+            ->paginate(2);
 
         return view('admin.index', ['news' => $news]);
     }
 
     public function create(Request $request)
     {
+        $news = new News();
+
         if ($request->isMethod('post')) {
             //$request->flash();
 
@@ -28,38 +30,48 @@ class NewsController extends Controller
             if ($request->file('image')) {
                 $path = Storage::putFile('public/images', $request->file('image'));
                 $url = Storage::url($path);
+                $news->image = $url;
             }
 
+            $news->fill($request->all())->save();
 
-            $data = [
-                'title' => $request->title,
-                //'category_id' => $request->category,
-                'text' => $request->text,
-                'image' => $url,
-                'isPrivate' => isset($request->isPrivate)
-            ];
+            //DB::table('news')->insert($news);
 
-
-            DB::table('news')->insert($data);
-
-            return redirect()->route('admin.index')->with('success', 'Новость успешно добавлена!');
-
+            return view('admin.create', [
+                'categories' => Category::query()->select(['id', 'category'])->get(),
+                'news' => $news
+            ]);
         }
 
         return view('admin.create', [
-            'categories' => []
+            'categories' => Category::query()->select(['id', 'category'])->get(),
+            'news' => $news
         ]);
     }
 
-    public function edit() {
-
+    public function edit(Request $request, News $news) {
+        return view('admin.create', [
+            'news' => $news,
+            'categories' => Category::query()->select(['id', 'category'])->get()
+        ]);
     }
-    public function destroy() {
 
+    public function destroy(News $news) {
+        $news->delete();
+        return redirect()->route('admin.index')->with('success', 'Новость успешно удалена!');
     }
 
-    public function update() {
-
+    public function update(Request $request, News $news) {
+        if ($request->isMethod('post')) {
+            if ($request->file('image')) {
+                $path = Storage::putFile('public', $request->file('image'));
+                $url = Storage::url($path);
+                $news->image = $url;
+            }
+            $news->fill($request->all());
+            $news->save();
+            return redirect()->route('admin.index')->with('success', 'Новость успешно изменена!');
+        }
     }
 }
 

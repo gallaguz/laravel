@@ -20,18 +20,15 @@ class IndexController extends Controller
 
     public function json()
     {
-        return response()->json(News::getNews())
+        return response()->json([])
             ->header('Content-Disposition', 'attachment; filename = "json.txt"')
             ->setEncodingOptions(JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
 
 
     }
-    public function test() {
-        return 'test';
-    }
     public function downloadImage()
     {
-        return 'lol';
-        //return response()->download('img/069.jpeg');
+        return response()->download('elsa_1.gif');
+
     }
 }
