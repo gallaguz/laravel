@@ -16,7 +16,7 @@ class CategoryController extends Controller
 
     public function show($name)
     {
-        
+
         $category = Category::query()->select(['id', 'category'])->where('name', $name)->get();
         $news = News::query()
             ->where('category_id', $category[0]->id)
