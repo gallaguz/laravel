@@ -12,6 +12,7 @@ $factory->define(News::class, function () {
     return [
         'title' => $faker->realText(rand(20,50)),
         'text' => $faker->realText(rand(100,3000)),
-        'isPrivate' => false
+        'category_id' => rand(1,10),
+        'isPrivate' => rand(0,1)
     ];
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,21 +13,23 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $category = [
-            [
-                "category" => "Спорт",
-                "name" => "sport"
-            ],
-            [
-                "category" => "Политика",
-                "name" => "politics"
-            ],
-            [
-                "category" => "Бизнес",
-                "name" => "business"
-            ]
-        ];
+        factory(Category::class, 10)->create();
 
-        DB::table('categories')->insert($category);
+//        $category = [
+//            [
+//                "category" => "Спорт",
+//                "name" => "sport"
+//            ],
+//            [
+//                "category" => "Политика",
+//                "name" => "politics"
+//            ],
+//            [
+//                "category" => "Бизнес",
+//                "name" => "business"
+//            ]
+//        ];
+//
+//        DB::table('categories')->insert($category);
     }
 }

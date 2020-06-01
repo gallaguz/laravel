@@ -31,6 +31,7 @@ Route::group([
     'namespace' => 'Admin',
     'as' => 'admin.'
 ], function () {
+
     //CRUD NEWS
     Route::get('/', 'NewsController@index')->name('index');
     Route::match(['get', 'post'], '/create', 'NewsController@create')->name('create');
