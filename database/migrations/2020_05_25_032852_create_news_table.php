@@ -26,6 +26,8 @@ class CreateNewsTable extends Migration
 
             //$table->timestamps();
         });
+
+        //(new CategorySeeder())->run();
     }
 
     /**

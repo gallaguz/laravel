@@ -14,11 +14,18 @@
             @forelse($news as $item)
                 <div class="col-md-12 card">
                     <div class="card-body">
+
                         <h2>
                             <a href="{{ route('news.show', $item) }}">{{ $item->title }}</a>
                         </h2>
-                        <a href=" {{ route('admin.edit', $item) }}"><button type="button" class="btn btn-success">Edit</button></a>
-                        <a href="{{ route('admin.destroy', $item) }}"><button type="button" class="btn btn-danger">Delete</button></a>
+
+                        <form action="{{ route('admin.news.destroy', $item) }}" method="post">
+                            <a href="{{ route('admin.news.edit', $item) }}"><button type="button" class="btn btn-success">Edit</button></a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                            @csrf
+                            @method('DELETE')
+                        </form>
+
                     </div>
                 </div>
             @empty

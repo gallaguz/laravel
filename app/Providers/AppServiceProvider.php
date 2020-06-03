@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +26,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+//        Validator::extend('admin', function ($attributes, $values, $parameters, $validator) {
+//           //dd($attributes, $values, $parameters, $validator);
+//           return false;
+//        });
         // \View::share('menu', 'menu<br>');
     }
 }

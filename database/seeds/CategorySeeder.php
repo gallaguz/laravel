@@ -14,22 +14,5 @@ class CategorySeeder extends Seeder
     public function run()
     {
         factory(Category::class, 10)->create();
-
-//        $category = [
-//            [
-//                "category" => "Спорт",
-//                "name" => "sport"
-//            ],
-//            [
-//                "category" => "Политика",
-//                "name" => "politics"
-//            ],
-//            [
-//                "category" => "Бизнес",
-//                "name" => "business"
-//            ]
-//        ];
-//
-//        DB::table('categories')->insert($category);
     }
 }

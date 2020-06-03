@@ -16,9 +16,9 @@
                     <div class="card-body">
 
                         <form enctype="multipart/form-data" method="POST"
-                              action="@if (!$news->id){{ route('admin.create') }}@else{{ route('admin.update', $news) }}@endif">
+                              action="@if (!$news->id){{ route('admin.news.store') }}@else{{ route('admin.news.update', $news) }}@endif">
                             @csrf
-
+                            @if ($news->id) @method('PATCH') @endif
                             <div class="form-group">
                                 <label for="newsTitle">Название новости</label>
                                 @if ($errors->has('title'))
@@ -29,9 +29,8 @@
                                     </div>
                                 @endif
                                 <input name="title" type="text" class="form-control" id="newsTitle"
-                                       value="{{ $news->title ?? old('title') }}">
+                                       value="{{ old('title') ?? $news->title }}">
                             </div>
-
 
                             <div class="form-group">
                                 <label for="newsCategory">Категория новости</label>
@@ -64,7 +63,7 @@
                                     </div>
                                 @endif
                                 <textarea name="text" class="form-control" rows="5"
-                                          id="newsText">{{ $news->text ?? old('text') }}</textarea>
+                                          id="newsText">{{ old('text') ?? $news->text }}</textarea>
                             </div>
 
                             <div class="form-group">
@@ -79,7 +78,7 @@
                             </div>
 
                             <div class="form-check">
-                                <input @if ($news->isPrivate == 1 || old('isPrivate') == 1) checked
+                                <input @if (old('isPrivate') == 1 || $news->isPrivate == 1 ) checked
                                        @endif name="isPrivate" class="form-check-input" type="checkbox" value="1"
                                        id="newsPrivate">
                                 <label class="form-check-label" for="newsPrivate">

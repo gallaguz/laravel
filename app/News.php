@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Rules\admin;
 use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
@@ -20,18 +21,18 @@ class News extends Model
             'text' => 'Текст новости',
             'category_id' => "Категория новости",
             'image' => "Изображение",
-            'isPrivate' => 'Приватность'
+            //'isPrivate' => 'Приватность'
         ];
     }
 
     public static function rules() {
         $tableNameCategory = (new Category())->getTable();
         return [
-            'title' => 'required|min:5|max:20',
+            'title' => ['required', 'min:5', 'max:20'],
             'text' => 'required',
             'category_id' => "required|exists:{$tableNameCategory},id",
             'images' => 'mimes:jpg,jpeg,bmp,png|max:1000',
-            'isPrivate' => 'required|bool'
+            //'isPrivate' => 'required|bool'
         ];
     }
 }

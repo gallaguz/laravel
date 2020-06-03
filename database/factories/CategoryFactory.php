@@ -11,6 +11,6 @@ $factory->define(Category::class, function () {
 
     return [
         'category' => $faker->word(),
-        'name' => $faker->realText(rand(20,50))
+        'name' => $faker->word()
     ];
 });
