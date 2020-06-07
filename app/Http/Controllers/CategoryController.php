@@ -18,18 +18,13 @@ class CategoryController extends Controller
 
     public function show($name)
     {
-
         $category = Category::query()
-            ->select(['id', 'category'])
-            ->where('name', $name)->get();
-        $news = News::query()
-            ->where('category_id', $category[0]->id)
+            ->where('name', $name)->firstOrFail();
+        $news = Category::query()
+            ->find($category->id)
+            ->news()
             ->paginate(2);
-
-        ///dd(Category::query()->find(1)->news()->get());
-        //  dd(News::query()->find(1)->category()->get());
 
         return view('news.category')->with('news', $news);
     }
-
 }

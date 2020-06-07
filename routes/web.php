@@ -33,13 +33,19 @@ Route::group([
     'as' => 'admin.',
     'middleware' => ['auth', 'is_admin']
 ], function () {
-    Route::match(['get', 'post'], '/profile', 'ProfileController@update')->name('updateProfile');
+
+    Route::get('/parser', 'ParserController@index')->name('parser');
+
+    Route::get('/users', 'UserController@index')->name('updateUser');
+    Route::get('/users/toggleAdmin/{user}', 'UserController@toggleAdmin')->name('toggleAdmin');
 
     Route::resource('/news', 'NewsController')->except('show');
     Route::get('/news/{some}', function () {
         abort(404);
     });
 });
+
+Route::match(['get', 'post'], '/profile', 'ProfileController@update')->name('updateProfile');
 
 Route::group([
     'prefix' => 'news',
@@ -54,6 +60,11 @@ Route::group([
         Route::get('/category/{name}', 'CategoryController@show')->name('show');
     });
 });
+
+
+Route::get('/auth/vk', 'LoginController@loginVK')->name('vkLogin');
+Route::get('/auth/vk/response', 'LoginController@responseVK')->name('vkResponse');
+
 
 Route::view('/vue', 'vue')->name('vue');
 

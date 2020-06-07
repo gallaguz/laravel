@@ -12,8 +12,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8 card">
                 <h2>Изменение учетных данных пользователя</h2>
-
-                <form method="post" action="{{ route('admin.updateProfile') }}">
+                <form method="post" action="{{ route('updateProfile') }}">
                     @csrf
                     @if ($errors->has('name'))
                         <div class="alert alert-danger" role="alert">

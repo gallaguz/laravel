@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -14,7 +13,11 @@ class ProfileController extends Controller
         $user = Auth::user();
 
         $errors = [];
+
         if ($request->isMethod('post')) {
+
+            $this->validate($request, $this->ValidateRules(), [], $this->attributeNames());
+
             if (Hash::check($request->post('password'), $user->password)) {
                 $user->fill([
                     'name' => $request->post('name'),
@@ -28,11 +31,28 @@ class ProfileController extends Controller
             } else {
                 $errors['password'][] = "Неверно введен текущий пароль";
             }
-            return redirect()->route('admin.updateProfile')->withErrors($errors);
+            return redirect()->route('updateProfile')->withErrors($errors);
         }
 
-        return view('admin.profile', [
+        return view('profile', [
             'user' => $user
         ]);
+    }
+
+    protected function ValidateRules()
+    {
+        return [
+            'name' => 'required|string|min:5',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'password' => 'required',
+            'newPassword' => 'required|string|min:3'
+        ];
+    }
+
+    protected function attributeNames()
+    {
+        return [
+            'newPassword' => 'Новый пароль'
+        ];
     }
 }

@@ -10,6 +10,9 @@
     <a class="nav-link" href="{{ route('news.category.index') }}">Категории</a>
 </li>
 
+<li class="nav-item">
+    <a class="nav-link"  href="{{ route('vkLogin') }}">VK Login</a>
+</li>
 
 @if(Auth::user() !== null && Auth::user()->is_admin)
     <li class="nav-item {{ request()->routeIs('admin.news.index')?'active':'' }}">
