@@ -49681,8 +49681,10 @@ module.exports = function(module) {
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '/ckeditor4'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-
+// import Vue from 'vue';
+// import CKEditor from 'ckeditor4-vue';
+//
+// Vue.use( CKEditor );
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -49702,9 +49704,13 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+//import ckeditor from './components/ckeditor.vue';
 
 var app = new Vue({
-  el: '#app'
+  el: '#app' // components: {
+  //     'ckeditor': ckeditor
+  // }
+
 });
 
 /***/ }),
